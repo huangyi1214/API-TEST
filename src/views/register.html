@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>注册</title>
+    <link rel="stylesheet" href="./public/css.animate.css" />
+    <link rel="stylesheet" href="./public/css/login.css" />
+    <link rel="stylesheet" href='./public/css/common.css' />
+</head>
+
+<body>
+    <!-- <form> -->
+    <div class="forget-li">
+        <ul class="forget-list">
+            <li>
+                <div class="forget-l fl">
+                    <span>手機號&nbsp;&nbsp;：</span>
+                </div>
+                <div class="forget-r fr">
+                    <input id="btn_msg" class="getCode" value="獲取驗證碼" type="button" />
+                    <input placeholder="請輸入手機號" type="text" id="mobile" />
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="forget-l fl">
+                    <span>驗證碼&nbsp;&nbsp;：</span>
+                </div>
+                <div class="forget-r fr">
+                    <input placeholder="請輸入短信驗證碼" type="text" id="msgcode" value="" />
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="forget-l fl">
+                    <span>密碼&nbsp;&nbsp;：</span>
+                </div>
+                <div class="forget-r fr">
+                    <input placeholder="請輸入8~20位有效數字和字母的組合密碼" type="password" id="password" />
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="forget-l fl">
+                    <span>確認密碼：</span>
+                </div>
+                <div class="forget-r fr">
+                    <input placeholder="請確認您的密碼" type="password" id="password_com" />
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="forget-l fl">
+                    <span>邀請碼: </span>
+                </div>
+                <div class="forget-r fr">
+                    <input placeholder="請確認邀請碼" type="text" id="upper" />
+                </div>
+                <div class="clear"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="login_word" id="okBox">
+        <div id="imgCode">
+            <img id="imgCodeOff" src="./public/images/reg-no.png"  value="off"/>
+            <img id="imgCodeOn" src="./public/images/reg-on.png"  style="display: none"/>
+        </div>
+
+        <label>同意接受《<a onclick="showBox('fxjss')" href="javascript:">風險揭示書</a>》以及《<a onclick="showBox('khxy')" href="javascript:;">客戶協議</a>》</label>
+        <br class="clear" />
+    </div>
+    <div class="login-btn">
+        <input type="image" src="./public/images/regbtn.png" value="" id="btn_register" />
+    </div>
+    <!-- </form> -->
+    <!--風險揭示書-->
+    <div class="ment-box" id="fxjss">
+        <div class="ment-box-c">
+            <a href="javascript:;" onclick="closeBox('fxjss')">X</a>
+            <div class="clear"></div>
+            <h3>風險揭示書</h3>
+            <p>
+                尊敬的客戶：
+                大西洋微理財業務是一種潛在收益和潛在風險較高的交易業務,對客戶的風險承受能力、理解風險的程度、風險控制能力以及交易經驗有較高的要求。
+
+                客戶簽署本協議，代表其對未來進行大宗商品微理財業務的風險已有了充分的認知與了解。
+                本風險揭示書（以下簡稱“揭示書”）旨在向客戶充分揭示商品微理財業務的風險,並且幫助客戶評估和確定自身的風險承受能力。
+
+                本揭示書披露了交易過程中可能發生的各種風險因素，但是鑒於市場的多變和複雜，本揭示書無法窮盡一切與商品微理財有關的風險。
+
+                鑒於商品微理財業務風險的存在，在簽訂入市協議及進行交易前，客戶應該仔細閱讀本揭示書，並確保自己已經充分理解有關交易的性質、規則；並依據自身的交易經驗、目標、財務狀況、承擔風險能力等自行決定是否參與該交易。
+
+                若客戶對於本揭示書有不理解或不清晰的地方，應該及時諮詢相關的機構，對揭示書不存在異議時請親自確認打勾。
+
+                一、溫馨提示
+                1、大西洋微理財業務具有高投機性和高風險性，不適合用養老基金、債務資金（如銀行貸款、借款等負債）等進行交易的客戶。
+                2、大西洋微理財業務只適合於滿足以下全部條件的客戶：
+                （1）年滿18周歲（含），且60周歲（含）以內，並具有完全民事行為能力的中國公民或依法在中華人民共和國境內註冊成立的企業法人。
+                （2）能夠充分理解有關此交易的一切風險，並且具有風險承受能力。
+                （3）因交易失誤而造成賬戶資金部分或全部損失、仍不會改變其正常的生活方式或影響其正常生產經營狀況的。
+
+                二、相關的風險揭示
+                1、政策風險
+                國家法律、法規、政策以及規章的變化，政府主管部門緊急措施的出台，相關監管部門監管措施的實施，交易中心規則制度的修改等原因，均可能會對客戶的交易產生影響，客戶必須承擔由此導致的一切損失。
+                2、價格波動的風險。
+                本市場的交易品種作為一種特殊的具有交易價值的商品，其價格受多種因素的影響（包括但不限於國際經濟形勢、相關市場走勢、政治局勢、自然因素），
+                這些因素對本市場的客戶品價格的影響機制非常複雜，客戶在實際操作中難以全面把握，因而存在出現交易失誤的可能性，如果不能有效控制風險，則可能遭受較大的損失，
+                客戶必須獨自承擔由此導致的一切損失。
+                3、技術風險。
+                此業務通過電子通訊技術和互聯網技術來實現。有關通訊服務及軟、硬件服務由不同的供應商提供，可能會存在品質和穩定性方面的風險；交易中心及其綜合會員不能控制電訊信號的強弱，也不能保證客戶客戶端的設備配置或連接的穩定性以及互聯網傳播和接收的實時性。
+                故由以上通訊或網絡故障導致的某些服務中斷或延時可能會對客戶的交易產生影響。另外，客戶的電腦系統亦有可能被病毒和/或網絡黑客攻擊，從而使客戶的交易決策無法正確和/或及時執行。對於上述不確定因素的出現也存在着一定的風險，有可能會對客戶的交易產生影響，客戶應該充分了解並承擔由此造成的全部損失。
+                4、交易風險。
+                （1）客戶需要了解交易中心的商品微理財業務具有低訂金的特點，可能導致快速的盈利或虧損。若與交易方向與行情的波動相反，會造成較大的虧損，根據虧損的程度，客戶必須有條件滿足隨時追加賬戶可用資金的要求，否則其持有合同將會被強行轉讓，客戶必須承擔由此造成的全部損失。
+                （2）交易系統商品報價以系統實時成交價為基準，該價格可能會與其他市場的商品價格存在微弱的差距，交易中心並不能保證上述交易價格與其他市場保持完全的一致性。
+                （3）交易中心提供的微理財業務，可能會存在以下風險：由於電腦設備運行速度、網絡傳輸速度等原因，可能會導致在行情觸及或穿越指定價格時，交易系統沒有為客戶成交訂立或平倉，客戶的交易沒有達成。因此，特別提示客戶在使用交易系統中微理財業務時，應充分考慮上述風險。如果客戶無法理解或承受上述風險，建議客戶不要進行交易。如果客戶堅持進行微理財的交易業務，將認為客戶已經完全理解並願意承擔全部風險，並願意承擔因此所帶來的一切後果。
+                （4）客戶在交易系統內，通過網上終端所提交的交易業務一經成交，即不可撤銷，客戶必須接受這種方式可能帶來的風險。
+                （5）交易中心、綜合會員及其工作人員不會對客戶作出獲利保證，並且不會與客戶分享收益或共擔風險。客戶應知曉針對商品微理財業務的任何獲利承諾或者不會發生虧損的承諾均為不可能或者沒有根據的。由此而造成的交易風險由客戶自行承擔。
+                （6）客戶的成交單據必須建立在自主決定的基礎之上。交易中心、綜合會員及其工作人員提供的任何關於市場的分析和信息，僅供客戶參考，不構成任何要約或承諾。由此而造成的交易風險由客戶自行承擔。
+                （7）在電子交易的過程中，有可能出現偶然性的明顯的錯誤報價，交易中心可能事後會對錯價及錯價產生的盈虧作出糾正，由此而造成的交易風險由客戶自行承擔。
+                5、不可抗力風險。
+                任何因大西洋微理財不能夠控制的原因，包括但不限於火災、爆炸、颱風、洪水、地震、潮汐、雷電、戰爭、供電、電信及通信設備中斷、罷工、政府管制、法規政策變更、交易中心暫停交易、交易中心規則中規定的交易異常、設備故障、通訊故障、互聯網系統故障及通過互聯網未經許可的存取、盜竊交易敏感性數據、他人惡意地對網站攻擊、計算機病毒及非可歸因於任何一方的信息傳遞中斷等其他無法預測或防範的不可抗力事件，都有可能會對客戶的交易產生影響，客戶應該充分了解並承擔由此造成的全部損失。
+
+                三、特別提示
+                1、客戶在參與交易之前務必詳盡地了解商品交易的基本知識和相關風險以及大西洋微理財有關的業務規則等，依法合規地從事商品微理財業務。
+                2、交易中心為了確保市場“公開、公平、公正”和健康穩定地發展，將採取更加嚴格的措施，強化市場的監管。請您務必密切地關注有關該市場的公告、風險提醒（包括但不限於交易場所發布公告、官網公告）等信息，及時了解市場風險狀況，做到理性交易，切忌盲目跟風。
+                3、客戶在開通交易賬戶之前，請配合綜合會員開展客戶的適當性管理工作，完整、如實地提供開戶所需要的信息，不得採取弄虛作假等手段規避有關的要求。否則，交易中心可以拒絕為其開通交易賬戶服務。
+                4、本揭示書上述風險揭示事項僅為列舉性質，未能詳盡的列明有關該市場的所有風險因素，客戶在參與該市場交易之前，還應認真的對其他可能存在的風險因素有所了解和掌握。
+                5、我們誠摯地希望並建議客戶，從風險承受能力等自身實際情況出發，審慎地決定是否參與此市場的交易，合理的配置自己的金融資產。
+                本人已認真閱讀以上風險說明並完全理解和同意，自願承擔由此造成的風險，以及由此帶來的一切可能的損失。
+
+            </p>
+        </div>
+    </div>
+    <!--客戶協議-->
+    <div class="ment-box" id="khxy">
+        <div class="ment-box-c">
+            <a href="javascript:;" onclick="closeBox('khxy')">X</a>
+            <div class="clear"></div>
+            <h3>客戶協議</h3>
+            <p></p>
+        </div>
+    </div>
+
+    <script src="../public/plugin/jquery/jquery.min.js"></script>
+    <script src="./public/js/binex.js"></script>
+    <script type="text/javascript">
+//        註冊
+        $("#btn_register").click(function () {
+
+            if ($("#mobile").val() == "") {
+                return BINEX.dialog.msg("請輸入手機號");
+            } else {
+                if (!/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|4|5|6|7|8|9]|17[0|1|3|5|6|7|8])\d{8}$/.test($("#mobile").val())) {
+                    return BINEX.dialog.msg("手機號有誤")
+                }
+            }
+
+            if ($("#msgcode").val() == "") {
+                return BINEX.dialog.msg("請輸入短信驗證碼");
+            }
+
+            if ($("#password").val() == "") {
+                return BINEX.dialog.msg("請輸入密碼");
+            } else {
+               if (BINEX.utils.CheckPassWord($("#password").val())==false)
+               {
+                   return BINEX.dialog.msg("請輸入8~20位有效數字和字母的組合密碼");
+               }
+            }
+
+            if ($("#password_com").val() == "") {
+                return BINEX.dialog.msg("請輸入確認密碼");
+            } else {
+                if ($("#password").val() != $("#password_com").val()) {
+                    return BINEX.dialog.msg("密碼輸入不一致");
+                }
+            }
+
+            if ($("#upper").val() == "") {
+                return BINEX.dialog.msg("請輸入邀請碼");
+            }
+            if ($('img').attr('value') === 'off') {
+                return BINEX.dialog.msg("請先閱讀和同意《風險揭示書》以及《客戶協議》");
+            }
+
+            BINEX.ajax.post("/register", {
+                mobile: $("#mobile").val(),
+                msgcode: $("#msgcode").val(),
+                password: $("#password").val(),
+                upper: $("#upper").val()
+            }, function (d) {
+                if (d.code == 0) {
+                    //BINEX.utils.setCookie('token', d.data.token, '30d')
+                    BINEX.dialog.msg("注册成功!")
+                    setTimeout(function () {
+                        window.location = '/login';
+                    }, 1000)
+
+                } else {
+                    BINEX.dialog.msg(d.msg);
+                }
+            })
+        })
+
+        function showBox(cs) {
+            var fxjss = document.getElementById(cs);
+            fxjss.style.display = "block";
+        }
+        function closeBox(cs) {
+            var fxjss = document.getElementById(cs);
+            fxjss.style.display = "none";
+        }
+
+        $("#btn_msg").click(function () {
+            if ($("#mobile").val() == "") {
+                return BINEX.dialog.msg("請輸入手機號");
+            } else {
+                if (!/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|4|5|6|7|8|9]|17[0|1|3|5|6|7|8])\d{8}$/.test($("#mobile").val())) {
+                    return BINEX.dialog.msg("手機號有誤")
+                }
+            }
+            BINEX.ajax.getJSON('/sendMsg',{mobile:$("#mobile").val()},function(d){
+                BINEX.dialog.msg(d.msg)
+                if(d.code==0){
+                    var s=60;
+                    var index=setInterval(function(){
+                          $("#btn_msg").val(s+"秒").attr("disabled","disabled");
+                          s--;
+                          if(s==0){
+                              clearInterval(index);
+                              $("#btn_msg").val("獲取驗證碼").removeAttr("disabled");
+                          }
+                    },1000)
+                }
+            })
+        })
+
+//        同意不同意
+        $('#imgCode').click(function () {
+            if ($('img').attr('value') === 'off') {
+                $('#imgCodeOff').hide()
+                $('#imgCodeOn').show()
+                $('img').attr('value','on')
+            } else if($('img').attr('value') === 'on'){
+                $('#imgCodeOn').hide()
+                $('#imgCodeOff').show()
+                $('img').attr('value','off')
+            }
+        })
+    </script>
+</body>
+
+</html>

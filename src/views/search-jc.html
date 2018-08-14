@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>疯狂竞猜-竞猜记录</title>
+    <link rel="stylesheet" href="./public/css/index.css" />
+</head>
+<body class="newbg">
+<div class="main">
+    <div class="search-table">
+        <ul id="orderDetail">
+            <li class="jctop">
+                <dl>
+                    <dd class="jc1">期號</dd>
+                    <dd class="jc4">開獎結果</dd>
+                    <dd class="jc5">下注金幣</dd>
+                    <dd class="jc6">中獎金幣</dd>
+                    <div class="clear"></div>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <!-- <div class="sc-p">
+        <a href="#">点击查看更多>></a>
+    </div> -->
+
+</div>
+
+
+<div class="foot">
+    <img src="./public/images/foot-my.png" />
+    <div class="foot-nav user">
+        <ul>
+            <li class="fl">
+                <a href="index.html">
+                    &nbsp;
+                </a>
+            </li>
+            <li class="fl">
+                <a href="daili.html">
+                    &nbsp;
+                </a>
+            </li>
+            <li class="fl">
+                <a href="usercenter.html">
+                    &nbsp;
+                </a>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div>
+<script src="../public/plugin/jquery/jquery.min.js"></script>
+<script src="./public/js/binex.js"></script>
+<script type="text/javascript">
+      $(function(){
+          BINEX.user.getOrderDetail();
+      })
+</script>
+</body>
+</html>

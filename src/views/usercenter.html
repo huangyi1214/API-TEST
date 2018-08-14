@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>疯狂竞猜-我的</title>
+    <link rel="stylesheet" href="./public/css/index.css" />
+    <link rel="stylesheet" href="./public/css/common.css" />
+</head>
+<body class="newbg">
+<div class="main">
+    <div class="user-center">
+        <div class="user-center-t">
+            <div class="uc-t-c">
+                <img src="./public/images/logotx.png" />
+            </div>
+            <p><%=username%></p>
+            <p>我的金幣：<%=balance%></p>
+            <div class="uc-t-b">
+                <div class="uc-tb-l fl">
+                    <!--<b>编号：32260</b>-->
+                    <a id="txbg" href="javascript:;"><img src="./public/images/tx.png"></a>
+                </div>
+                <div class="uc-tb-r fl">
+                    <!--<b>余额：3226元</b>-->
+                    <a id="czbg" href="javascript:;"><img src="./public/images/cz.png" /></a>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="user-con">
+            <div class="user-bg">&nbsp;</div>
+            <div class="user-con-t">
+                <ul>
+                    <li>
+                        <a href="search-jc.html">
+                            <div class="user-list-img fl">
+                                <img src="./public/images/my1.png" />
+                            </div>
+                            <div class="user-list-wz fl">
+                                <span>競猜記錄</span>
+                            </div>
+                            <div class="user-list-xjt fr">
+                                <img src="./public/images/xsj.png" />
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="qianbao.html">
+                            <div class="user-list-img fl">
+                                <img src="./public/images/my2.png" />
+                            </div>
+                            <div class="user-list-wz fl">
+                                <span>我的錢包</span>
+                            </div>
+                            <div class="user-list-xjt fr">
+                                <img src="./public/images/xsj.png" />
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                    </li>
+                    <!--<li>-->
+                        <!--<a href="old.html">-->
+                            <!--<div class="user-list-img fl">-->
+                                <!--<img src="./public/images/my7.png" />-->
+                            <!--</div>-->
+                            <!--<div class="user-list-wz fl">-->
+                                <!--<span>往期结果</span>-->
+                            <!--</div>-->
+                            <!--<div class="user-list-xjt fr">-->
+                                <!--<img src="./public/images/xsj.png" />-->
+                            <!--</div>-->
+                            <!--<div class="clear"></div>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!-- <li>
+                        <a href="yxgz.html">
+                            <div class="user-list-img fl">
+                                <img src="./public/images/my3.png" />
+                            </div>
+                            <div class="user-list-wz fl">
+                                <span>游戏攻略</span>
+                            </div>
+                            <div class="user-list-xjt fr">
+                                <img src="./public/images/xsj.png" />
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+            <div class="user-bg">&nbsp;</div>
+            <div class="user-con-t">
+                <ul>
+                    <li>
+                        <a href="change-allpwd.html">
+                            <div class="user-list-img fl">
+                                <img src="./public/images/my4.png" />
+                            </div>
+                            <div class="user-list-wz fl">
+                                <span>密碼修改</span>
+                            </div>
+                            <div class="user-list-xjt fr">
+                                <img src="./public/images/xsj.png" />
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="gonggao.html">
+                            <div class="user-list-img fl">
+                                <img src="./public/images/my5.png" />
+                            </div>
+                            <div class="user-list-wz fl">
+                                <span>公告活動</span>
+                            </div>
+                            <div class="user-list-xjt fr">
+                                <img src="./public/images/xsj.png" />
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="online.html">
+                            <div class="user-list-img fl">
+                                <img src="./public/images/my6.png" />
+                            </div>
+                            <div class="user-list-wz fl">
+                                <span>聯系客服</span>
+                            </div>
+                            <div class="user-list-xjt fr">
+                                <img src="./public/images/xsj.png" />
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="user-bg">&nbsp;</div>
+            <div class="user-con-t last-list">
+                 <div id="btn_logout"  style="padding:8px 0;color:#fff;font-size:14px;">退出登錄</div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="foot">
+    <img src="./public/images/foot-my.png" />
+    <div class="foot-nav user">
+        <ul>
+            <li class="fl">
+                <a href="index.html">
+                    &nbsp;
+                    <!--<img src="./public/images/icon-1-off.png" />-->
+                    <!--<span>游戏</span>-->
+                </a>
+            </li>
+            <li class="fl">
+                <a href="daili.html">
+                    &nbsp;
+                    <!--<img src="./public/images/icon-2-off.png" />-->
+                    <!--<span>推广</span>-->
+                </a>
+            </li>
+            <li class="fl">
+                <a href="usercenter.html">
+                    &nbsp;
+                    <!--<img src="./public/images/icon-4.png" />-->
+                    <!--<span>我的</span>-->
+                </a>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div>
+<script src="../public/plugin/jquery/jquery.min.js"></script>
+<% include rebox.html %>
+<% include txbox.html %>
+<script src="./public/js/binex.js"></script>
+<script type="text/javascript">
+      $(function(){
+          $("#btn_logout").click(function(){
+              BINEX.user.logout();
+          })
+          $(".closeBox").on("click",function(){
+              $(".box-cz, .box-list, .box-tx").hide();
+          });
+      })
+</script>
+</body>
+</html>

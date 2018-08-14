@@ -1,0 +1,82 @@
+[2018-08-07 16:26:41.358] [ERROR] socket - connect ETIMEDOUT
+[2018-08-07 16:26:51.505] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:26:51.513] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:26:51.518] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:26:51.530] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:26:51.547] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:26:51.560] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:26:51.576] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:26:51.590] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:27:11.316] [ERROR] socket - connect ETIMEDOUT
+[2018-08-07 16:27:12.746] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:27:12.754] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:27:12.771] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:27:12.779] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:27:12.797] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:27:12.805] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:27:12.829] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[2018-08-07 16:27:12.835] [ERROR] redis - Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+Error: Redis connection to 192.168.1.15:6379 failed - connect ETIMEDOUT 192.168.1.15:6379
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/oauth.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/oauth.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+import redis from '../lib/redis';
+import config from '../../config';
+import utils from '../lib/utils';
+import User from '../models/user';
+import Account from '../models/account';
+import User_hierarchy from '../models/user_hierarchy'
+import Base from '../lib/base';
+import { APIError, ErrorCode } from '../lib/APIError';
+
+const redisClient = redis.createClient({ db: 14 });
+
+/**
+ * 
+ * 
+ * 接口返回对象
+ * @typedef {Object} result
+ * @property {ErrorCode} code - 返回码 如 0:代表成功  1000:服务端错误 2000:参数有误 等
+ * @property {string} msg - 说明
+ * @property {Object} data - 数据 如:{}
+ */
+
+/**
+ * 用户登录、注册、授权相关接口
+ * @class
+ * @extends Base 
+ * @classdesc 用户登录、注册、授权相关接口
+ */
+class OAuth extends Base {
+
+    /**
+     * @ignore
+     */
+    constructor() {
+        super();
+    }
+
+    /**
+     * GET 首页(页面)
+     * @method
+     */
+    async index(req, res, next) {
+        let pager={username:'--',balance:'--'}
+        if(req.session.user){
+            let user=req.session.user;
+            let account=await Account.findByUserID(user.userID);
+            pager.username=user.loginName.slice(0,3)+"****"+user.loginName.slice(7,11);
+            pager.balance=account.balance;
+        }                                                                                                  
+        res.render('index',pager)
+    }
+
+    /**
+    * GET 登录(页面)
+    * @method 
+    */
+    async login_page(req, res, next) {
+        res.render('login')
+    }
+
+    /**
+    * GET 注册(页面)
+    * @method 
+    */
+    async register_page(req, res, next) {
+        res.render('register')
+    }
+
+    /**
+     * GET 获取验证码
+     * 
+     */
+    async code(req, res, next) {
+
+    }
+
+    /**
+     * POST 用户登录接口 
+     * @memberof OAuth
+     * @method login 用户登录接口
+     * @readonly
+     * @param {string} username -账户
+     * @param {string} password -密码
+     * @return {result}
+     */
+    async login(req, res, next) {
+        const username = req.body.username;
+        const password = req.body.password;
+
+        try {
+            if (utils.isNull(username) || utils.isNull(password)) {
+                return res.error("用户名或密码不能为空", ErrorCode.ParamError);
+            }
+            let user = await User.findByName(username);
+            if (!user) {
+                return res.error("用户名不存在", ErrorCode.ParamError)
+            }
+            if (user.userType != 8) {
+                return res.error("用户名不存在", ErrorCode.ParamError);
+            }
+            user = await User.findByName(username, utils.md5(password + user.encrypt));
+            if (!user)
+                return res.error("用户名或密码错误", ErrorCode.ParamError);
+            if (user.status == 0)
+                return res.error("用户已禁用", ErrorCode.VerifyFail);
+            if (user.status == 2)
+                return res.error("用户已注销", ErrorCode.VerifyFail);
+
+            let token = utils.md5(user.userID + Date.now().toString())
+
+            let sign_token = await redisClient.getAsync(config.session_token_prefix + user.userID);
+            if (config.only_sign) {
+                //唯一登录
+                if (!utils.isNull(sign_token)) {
+                    let result = await redisClient.delAsync(config.session_user_prefix + sign_token);
+                }
+            } else {
+                if (!utils.isNull(sign_token)) {
+                    token = sign_token;
+                }
+            }
+            redisClient.set(config.session_token_prefix + user.userID, token, 'EX', config.session_ttl);//设置token 缓存
+            redisClient.set(config.session_user_prefix + token, JSON.stringify(user), 'EX', config.session_ttl); //设置用户缓存
+            req.session.user = user;
+            req.session.token = token;
+            res.success("登录成功", { token: token })
+        } catch (e) {
+            next(e);
+        }
+
+    }
+
+    /**
+     * POST 用户注册 
+     * @method register
+     * @memberof OAuth
+     * @param {string} mobile -手机号
+     * @param {string} msgcode -短信验证码
+     * @param {string} password -密码
+     * @param {string} upper -邀请码/经纪人
+     * @return {result}
+     */
+    async register(req, res, next) {
+        try {
+            let ip = utils.getClientIp(req);
+            //获取参数
+            let { mobile, msgcode, password, upper } = req.body;
+            //验证
+            if (utils.isNull(mobile))
+                return res.error("手机号不能为空", ErrorCode.ParamError)
+            if (utils.isNull(msgcode))
+                return res.error("验证码不能为空", ErrorCode.ParamError)
+            if (utils.isNull(password))
+                return res.error("密码不能为空", ErrorCode.ParamError)
+            if (utils.isNull(upper))
+                return res.error("邀请码不能为空", ErrorCode.ParamError)
+
+            let isExist = await User.isExist(mobile);
+            if (isExist)
+                return res.error("手机号已注册", ErrorCode.VerifyFail);
+
+            let upperUser = await User.findByName(upper);
+            if (!upperUser)
+                return res.error("邀请码有误", ErrorCode.VerifyFail);
+
+            let encrypt = utils.randomLetter(6);
+            let password_md5 = utils.md5(password + encrypt);
+            let user = {
+                loginName: mobile,
+                name: mobile,
+                password: password_md5,
+                encrypt: encrypt,
+                pid: upperUser.userID,
+                pusername: upperUser.loginName,
+                createUser: upperUser.name,
+            };
+            let admin = {
+                username: mobile,
+                name: mobile,
+                password: password_md5,
+                encrypt: encrypt,
+                createUser: upperUser.name,
+                lastloginip: ip
+            }
+            let now = new Date();
+            let month = now.getMonth() + 1;
+            let date = now.getDate();
+            let account = {
+                accountNumber: now.getFullYear().toString() + (month.length > 1 ? month : '0' + month).toString() + (date.toString().length > 1 ? date : '0' + date).toString(),
+                password: utils.md5(password)
+            }
+
+            //获取上级层级
+            let levels = await User_hierarchy.getListByUserID(upperUser.userID);
+            if (levels == null || levels.length &lt; 0)
+                return res.error("直属经纪有误")
+
+            let list_levels = [];
+            let firstlevel = levels[0];
+            //添加直属层级
+            list_levels.push({
+                parentID: firstlevel.userID,
+                userType: 8,
+                parentLevel: 1,
+                parentUser: upperUser.loginName,
+                parentType: firstlevel.userType
+            })
+            //设置直接所属
+            switch (firstlevel.userType) {
+                case 2:
+                    user.nationalCenterUser = upperUser.loginName;
+                    break;
+                case 3:
+                    user.centerUser = upperUser.loginName;
+                    break;
+                case 4:
+                    user.comprehensiveUser = upperUser.loginName;
+                    user.memberID = upperUser.userID;
+                    break;
+                case 5:
+                    user.agentVipUser = upperUser.loginName;
+                    break;
+                case 6:
+                    user.proxyUser = upperUser.loginName;
+                    break;
+                case 7:
+                    user.businessUser = upperUser.loginName;
+                    break;
+                case 8:
+                    user.oneAgentUser = upperUser.loginName;
+                    break;
+            }
+
+            let i = 1;
+            for (let j = 0; j &lt; levels.length; j++) {
+                let level = levels[j];
+                switch (level.parentType) {
+                    case 2:
+                        user.nationalCenterUser = level.parentUser;
+                        break;
+                    case 3:
+                        user.centerUser = level.parentUser;
+                        break;
+                    case 4:
+                        user.comprehensiveUser = level.parentUser;
+                        user.memberID = (await User.findByName(level.parentUser).userID);
+                        break;
+                    case 5:
+                        user.agentVipUser = level.parentUser;
+                        break;
+                    case 6:
+                        user.proxyUser = level.parentUser;
+                        break;
+                    case 7:
+                        user.businessUser = level.parentUser;
+                        break;
+                    case 8:
+                        i++;
+                        switch (i) {
+                            case 2:
+                                user.twoAgentUser = level.parentUser;
+                                break;
+                            case 3:
+                                user.threeAgentUser = level.parentUser;
+                                break;
+                            case 4:
+                                user.fourAgentUser = level.parentUser;
+                                break;
+                            case 5:
+                                user.fiveAgentUser = level.parentUser;
+                                break;
+                        }
+                        break;
+                }
+                list_levels.push({
+                    parentID: level.parentID,
+                    userType: 8,
+                    parentLevel: level.parentLevel + 1,
+                    parentUser: level.parentUser,
+                    parentType: level.parentType
+                })
+            }
+            let result = await User.register(user, admin, account, list_levels);
+            if (result) {
+
+                user = await User.findByName(mobile);
+                let token = utils.md5(user.userID + Date.now().toString())
+
+                redisClient.set(config.session_token_prefix + user.userID, token, 'EX', config.session_ttl);//设置token 缓存
+                redisClient.set(config.session_user_prefix + token, JSON.stringify(user), 'EX', config.session_ttl); //设置用户缓存
+                req.session.user = user;
+                req.session.token = token;
+
+                res.success("注册成功!",token)
+            } else {
+                return res.error("注册失败!", ErrorCode.VerifyFail)
+            }
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    /**
+     * POST 退出登录
+     * @method logout
+     */
+    async logout(req, res, next) {
+        req.session.user=null;
+        res.success("成功退出")
+    }
+}
+
+export default new OAuth();</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="APIError.html">APIError</a></li><li><a href="OAuth.html">OAuth</a></li><li><a href="Proxy.html">Proxy</a></li><li><a href="Trade.html">Trade</a></li><li><a href="User.html">User</a></li><li><a href="Wechat.html">Wechat</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ErrorCode">ErrorCode</a></li><li><a href="global.html#logout">logout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Oct 18 2017 15:43:35 GMT+0800 (中国标准时间)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

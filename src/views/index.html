@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>疯狂竞猜</title>
+    <link rel="stylesheet" href="./public/css/index.css" />
+    <link rel="stylesheet" href="./public/css/flipclock.css" />
+    <link rel='stylesheet' href='./public/css/common.css' />
+</head>
+
+<body class="indexbg" style="display: none;">
+
+    <div class="main">
+        <div class="main-top">
+            <div class="main-top-l fl">
+                <div class="main-topl-l fl">
+                    <img src="./public/images/logotx.png" />
+                </div>
+                <div class="main-topl-r fl">
+                    <b>名稱: <%=username%></b>
+                    <span class="text-overflow"><%=balance%> 幣</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="main-top-r fr">
+                <a href="javascript:;" id="czbg">
+                <img src="./public/images/czbg.gif" />
+            </a>
+                <!--<input type="button" class="bg-red" value="充值" id="recharge" />-->
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="index-con">
+            <div class="index-list">
+                <div class="index-fl fl">
+                    <a data-id="1" href="#"><img src="./public/images/index01.png" /></a>
+                </div>
+                <div class="index-fr fr">
+                    <a data-id="2" href="#"><img src="./public/images/index04.png" /></a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="index-list">
+                <div class="index-fl fl">
+                    <a data-id="3" href="#"><img src="./public/images/index05.png" /></a>
+                </div>
+                <div class="index-fr fr">
+                    <a data-id="4" href="#"><img src="./public/images/index08.png" /></a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <!-- <div class="index-list index-last-list">
+                <div class="index-fl fl">
+                    <a data-id="5" href="#"><img src="./public/images/index07.png" /></a>
+                </div>
+                <div class="index-fr fr">
+                    <a data-id="6" href="#"><img src="./public/images/index03.png" /></a>
+                </div>
+                <div class="clear"></div>
+            </div> -->
+        </div>
+        <div class="index-btn">
+            <a id="btn_start"><img src="./public/images/play.gif" /></a>
+        </div>
+
+    </div>
+
+    <div class="foot">
+        <img src="./public/images/foot-index.png" />
+        <div class="foot-nav user">
+            <ul>
+                <li class="fl">
+                    <a href="index.html">
+                    &nbsp;
+                </a>
+                </li>
+                <li class="fl">
+                    <a href="daili.html">
+                    &nbsp;
+                </a>
+                </li>
+                <li class="fl">
+                    <a href="usercenter.html">
+                    &nbsp;
+                </a>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+    </div>
+
+    <div class="box-bangdan">
+        <!--玩法介绍-->
+        <div class="box2 box-list wanfa">
+            <a href="javascript:;" class="closeBox">&nbsp;</a>
+            <div class="wanfa-content">
+                <!--<ul>-->
+                    <!--<li>-->
+                        <!--<h3 class="title">競猜周期：</h3>-->
+                        <!--<p class="content">-->
+                            <!--60秒/周期，1-50秒內可下單，倒計時10秒內不可下單；-->
+                        <!--</p>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<h3 class="title">競猜【大小合】</h3>-->
+                        <!--<p class="content">-->
+                            <!--【合】：數值末尾三位數，其中任意兩位數值相同，則為【合】-->
+                            <!--【大】：數值末尾為【5、6、7、8、9】時，則為【大】-->
+                            <!--【小】：數值末尾為【0、1、2、3、4】時，則為【小】-->
+                            <!--註明：【大小合】為同一種玩法，競猜開獎結果只會出現其中的任意一種。-->
+                            <!--數值後三位任意兩位數值相同，則為【合】，不論末尾數是【大】/【小】，競猜結果只能為【合】。-->
+
+                        <!--</p>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<h3 class="title">競猜【單雙】</h3>-->
+                        <!--<p class="content">-->
+                            <!--【單】：數值末尾為【1、3、5、7、9】時，為【單】-->
+                            <!--【雙】：數值末尾為【0、2、4、6、8】時，為【雙】-->
+                            <!--註明：【大小合】【單雙】為兩種不同的玩法，互不影響，玩家可以隨意選擇。-->
+                            <!--更多玩法持續更新中，敬請期待……-->
+                        <!--</p>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            </div>
+        </div>
+        <!--竞猜榜单-->
+        <div class="box3 box-list bangdan">
+            <a href="javascript:;" class="closeBox">&nbsp;</a>
+            <div class="bangdan-content">
+                <ul id="bd-list">
+                </ul>
+            </div>
+        </div>
+        <!--游戏攻略-->
+        <div class="box4 box-list youxi">
+            <a href="javascript:;" class="closeBox">&nbsp;</a>
+            <div class="youxi-content">
+                <!--<ul>-->
+                    <!--<li>-->
+                        <!--<h3 class="title">問：</h3>-->
+                        <!--<p class="content yx-ask">-->
+                            <!--如何才算贏？盈利多少金額？-->
+                        <!--</p>-->
+                        <!--<h3 class="title">答：</h3>-->
+                        <!--<p class="content yx-answer">-->
+                            <!--如果玩家競猜中【大小合】、【單雙】中任意一種，則按照顯示的賠率贏得金額；如玩家沒有競猜中，則損失掉下注金額。-->
+                        <!--</p>-->
+                        <!--<h3 class="title">如：</h3>-->
+                        <!--<p class="content yx-example">-->
+                            <!--您在競猜【合】和【單】分別下注1000元，如果本期開獎結果為【單】且為【合】，那麼你將贏得：（1000*3.65）+（1000*1.85）=5700元。-->
+                        <!--</p>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<h3 class="title">問：</h3>-->
+                        <!--<p class="content yx-ask">-->
+                            <!--可否【大小合】【單雙】同時下注？-->
+                        <!--</p>-->
+                        <!--<h3 class="title">答：</h3>-->
+                        <!--<p class="content yx-answer">-->
+                            <!--可以同時自由選擇下注，下注金額根據自由選擇。-->
+                        <!--</p>-->
+                        <!--&lt;!&ndash;<h3 class="title">如：</h3>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<p class="content yx-example">&ndash;&gt;-->
+                            <!--&lt;!&ndash;&ndash;&gt;-->
+                        <!--&lt;!&ndash;</p>&ndash;&gt;-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<h3 class="title">問：</h3>-->
+                        <!--<p class="content yx-ask">-->
+                            <!--個人推廣怎麼推廣？-->
+                        <!--</p>-->
+                        <!--<h3 class="title">答：</h3>-->
+                        <!--<p class="content yx-answer">-->
+                            <!--您可以邀請好友參與競猜（只需要好友掃描你的二維碼註冊即可），無論輸贏，您均可獲得返佣，您的好友推薦好友參與競猜，同樣你也是可以獲得返佣，具體請查看「我的推廣-傭金統計」，同時提取個人推廣二維碼。-->
+                        <!--</p>-->
+                    <!--</li>-->
+
+                    <!--<li>-->
+                        <!--<h3 class="title">問：</h3>-->
+                        <!--<p class="content yx-ask">-->
+                            <!--如果快速盈利到1000塊錢？-->
+                        <!--</p>-->
+                        <!--<h3 class="title">答：</h3>-->
+                        <!--<p class="content yx-answer">-->
+                            <!--首先得明白倍投原理，總投入資金1000元，可下3次（3次全錯概率15%-20%，成功率85%）第一次下單100元，虧損；第二次下單200元，虧損；第三次下單剩餘700元，盈利1.9倍即1330元，最終獲,1330-1000=330元。-->
+                        <!--</p>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            </div>
+        </div>
+        <!--福利活动-->
+        <div class="box6 box-list fuli">
+            <a href="javascript:;" class="closeBox">&nbsp;</a>
+            <div class="fuli-content">
+                <!-- <h3>更多福利请添加公众号客服<img src='./public/images/tj.png' /></h3> -->
+                <div class="fuli-list">
+                </div>
+            </div>
+        </div>
+        <!--竞猜记录-->
+        <div class="box5 box-list jcjl">
+            <a href="javascript:;" class="closeBox">&nbsp;</a>
+            <div class="jcjl-content">
+                <ul id="jc-list">
+                    <li class="jc-list-top">
+                        <dl>
+                            <dd class="jc1">期號</dd>
+                            <dd class="jc4">開獎結果</dd>
+                            <dd class="jc5">下注金額</dd>
+                            <dd class="jc6">中獎金額</dd>
+                            <div class="clear"></div>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--充值成功-->
+    <div class="czcg-box">
+        <div class="czcg-ok-con">
+            <img src="./public/images/czcg-ok.png" />
+            <p class="czcg-p"></p>
+        </div>
+    </div>
+    <!--按钮音效-->
+    <audio id="btnMusic" controls preload="auto" hidden="hidden">
+        <source src="./public/music/tabM.mp3" controls></source>
+        <source src="audio/beep.ogg" controls></source>
+    </audio>
+    <script type="text/javascript" src="./public/plugin/jquery/jquery.min.js"></script>
+    <script type='text/javascript' src='./public/js/binex.js'></script>
+    <script type="text/javascript" src="./public/plugin/jquery/NProgress.js"></script>
+    <% include rebox.html %>
+    <script type="text/javascript">
+        var btnMusic = $("#btnMusic")[0];
+        $('body').show();
+        NProgress.start();
+        setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 2000);
+        $(function () {
+            $(".index-list a").on("click", function () {
+                btnMusic.play();
+                var ids = $(this).attr("data-id");
+                if (ids == 1) {
+                    setTimeout(function () {
+                        window.location.href = 'daili.html';
+                        return false;
+                    }, 450)
+                } else {
+                    $(".box-bangdan").show();
+                    $(".box" + ids).show();
+                }
+            });
+            $(".closeBox").on("click", function () {
+                $(".box-bangdan, .box-list, .box-cz").hide();
+            });
+
+            $("#btn_start").click(function(){
+                btnMusic.play();
+                setTimeout(function () {
+                        window.location.href = 'trade.html';
+                        return false;
+                    }, 450)
+            })
+
+        });
+    </script>
+    <script type='text/javascript'>
+        $(function () {
+            BINEX.trade.getRanking();
+        })
+    </script>
+</body>
+
+</html>

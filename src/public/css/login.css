@@ -1,0 +1,91 @@
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, i, u, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, fieldset, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {  margin: 0;  padding: 0;  border: 0;  vertical-align: baseline;  font: inherit;  font-size: 100%;  }
+html{ overflow-x:auto; overflow-y:auto;}
+.bgwhite{background:#fff;}
+.bgblack{background:#000;}
+.bgorange{background:#D5A74F;}
+.bgdescription{background:#e6e6e6;}
+*{ padding:0; margin:0;}
+ul, ol,li{ list-style-type:none;margin:0;padding:0;}
+div, p, span, a {  font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;  }
+a{ text-decoration:none; color:#333;  }
+a:hover{ cursor:pointer;}
+a:active{color:#333;}
+img{border:0; max-width:100%;}
+*,*:before,*:after {  -webkit-box-sizing: border-box;  -moz-box-sizing: border-box;  box-sizing: border-box;}
+li { line-height:normal; }
+table { border-collapse: collapse; border-spacing: 0; }
+h1,h2,h3,h4,h5,h6{margin:0; font-weight:normal; font-family:'microsoft yahei',Arial; }
+input,table,tr,td{ margin:0; padding:0; border:none;}
+button,table{ border:none; background:none; margin:0; padding:0;}
+select{ margin:0; padding:0; font-family:'microsoft yahei',Arial;}
+input{ outline:none;}
+textarea{ resize:none; outline:none;  }
+em{ font-style: normal; }
+.fl{float:left;}
+.fr{float:right;}
+.clear{clear:both;}
+body{background:url(../images/userbg.jpg) no-repeat #191F41; background-size:cover;}
+.login{ width:100%; height:100%;}
+.login .logo{width:50%; padding:30px 0 0; margin:0 auto 50px; text-align: center;}
+.login .logo img{width:80%;}
+.wx-login{ text-align: center; margin:0 0 20px; position: relative;}
+.wx-login a{ color:#fff; font-size:12px;}
+.login .wz{width:60%; margin:0 auto; padding:30px 0;}
+.login .wz img{width:100%;}
+/*.login-type{border-radius:5px;width:80%;margin:10px auto; background: rgba(0,0,0,.3); border:2px solid rgba(0,0,0,.3)}*/
+.login-type input{color:#fff; padding-left:20px;  background: none;  line-height:40px; width:90%;margin:0 auto; display: block;}
+.login-type label{color:#CCCDD1; font-size:12px;width:90%; margin:0 auto; display: block; line-height:30px;}
+.login-btn{width:80%; margin:15px auto 0;}
+.login-btn input{ width:100%; }
+.login-btn input{-webkit-appearance: none;}
+.login_word label{float:left; color:#FFF; font-size:12px; line-height:22px;}
+.login_word input.checkbox {font-family:Microsoft YaHei,Helvetica;-webkit-appearance:none;outline: medium; border:1px solid #fff; border-radius: 2px;  width: 15px;  height: 15px;  float: left;  margin: 3px; position: relative; }
+.login_word input.checkbox:checked:after{content: url(../images/checked.png);       display: block;       position: absolute; top:-3px; left:2px;}
+.login_word a { font-size:12px;text-decoration: underline;  color: red; }
+.login-p {  color: #fff;  font-size: 12px;   line-height: 42px; width:80%; margin:0 auto; }
+.login-p a{color:red;}
+.login-p a.forget{float:right;color:#fff;}
+.login_word{width:80%;margin:10px auto;}
+.login-yzm{ position: relative; border-radius:5px;width:80%;margin:10px auto; background: rgba(0,0,0,.3); border:2px solid rgba(0,0,0,.3);}
+.login-yzm .code{ position: absolute; background: #42A7E2; right:10px;bottom:5px; border-radius: 5px; width:60px;}
+.login-pwd, .login-login{ position: relative;
+    border-radius:5px;width:80%;margin:10px auto; background: rgba(0,0,0,.3); border:2px solid rgba(0,0,0,.3);
+}
+.login-type label{ position: absolute; left:5px; top:10px; width:20px; height:20px;}
+.login-type .eye{ position: absolute; right:10px; top:10px; width:25px; height:20px;}
+.login-pwd{ position: relative;}
+.login-pwd a{ position: absolute;right:10px;bottom:0; color:#C9CDCE; height:40px; font-size:12px; line-height:30px; display: block;}
+.login-pwd .icons, .login-login .icons, .login-yzm .icons{position: absolute; left:10px; top:15px; width:20px;}
+.logo p{color:#fff; line-height:40px;}
+.forget-li{ width:80%; margin:20px auto 0;}
+.forget-li .forget-list{width: 334px;}
+.forget-l{width: 22%; line-height:50px; color:#fff; font-size:14px;}
+.forget-r{width: 78%; position: relative;left: -4px;}
+.forget-r input{margin-bottom:10px;color:#fff; background:url(../images/forgetbg.png) no-repeat; background-size:cover; padding-left:10px; border-radius:5px; line-height:45px; width:100%;}
+.forget-r img{ position: absolute; right:10px;top:10px; border-radius: 5px; width:60px;}
+.login_word img{width:15px;margin:5px 0 0; float:left;}
+.forget-r input.getCode{ position: absolute; right:10px;top:7px; border-radius: 5px; padding-left:0; text-align: center; width:80px;background:#3EACEB; height:30px; line-height:30px; color:#fff;}
+.ment-box{ width: 100%;  height: 100%;  overflow: hidden;  display: none;  position: fixed;  top: 0;  left: 0;  z-index: 99999;  background: url(../images/cover_bg.png);}
+.ment-box-c{position:relative;width:80%;margin:50px auto 0;background:rgba(0,0,0,.9); border-radius:10px;padding:10px;}
+.ment-box-c h3{ text-align: center; color:#fff; line-height:40px;}
+.ment-box-c p{color:#fff; font-size:12px; padding:0 10px; line-height:30px; height:300px;overflow-y: auto;}
+.ment-box-c a{ position: absolute; display: block; right:15px; top:10px;font-size:12px; text-align: center; line-height:21px; color:#fff; border:2px solid #fff;  border-radius:25px; width:25px;height:25px;}
+.phone-box{display:block; width: 100%;  height: 100%;  overflow: hidden;  position: fixed;  top: 0;  left: 0;  z-index: 99999;  background: url(../images/cover_bg.png);}
+.phone-box-c{position:relative;width:80%;margin:25% auto 0;background:#000C1C; border-radius:10px;padding:10px;}
+.phone-box-c a{ position: absolute; display: block; right:15px; top:10px;font-size:12px; text-align: center; line-height:21px; color:#fff; border:2px solid #fff;  border-radius:25px; width:25px;height:25px;}
+.phone-box-c h3{text-align: center; color:#fff; line-height:40px;}
+.pbc-li p{color:#fff; font-size:14px; line-height:25px;}
+.pbc-li-input input.pbc-li-l{    margin-bottom: 10px;  color: #fff;  background: rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.07);  padding-left: 10px;  border-radius: 5px;  line-height: 40px;  width: 70%;}
+.pbc-li-input input.pbc-li-r{background:#FF9C12; color:#000; width:25%; height:30px; line-height:30px; border-radius: 5px;}
+.pbc-li-input input.new-pbc{ margin-bottom: 10px;  color: #fff; border:1px solid rgba(255,255,255,0.07);  background: rgba(255,255,255,0.07);  padding-left: 10px;  border-radius: 5px;  line-height: 40px;  width: 100%;}
+.pbc-btn input{width:100%; background:#b3b3b3; line-height:40px; border-radius:5px; margin:10px auto;}
+.pbc-btn input.ok{ background:#fd9b2d; }
+@media(max-width:375px){
+    .forget-r input, .forget-l{line-height:40px;}
+}
+@media(max-width:320px){
+    .forget-r input{line-height:35px;}
+    .forget-l{line-height:35px;}
+    .forget-r input.getCode{top:2px;}
+}

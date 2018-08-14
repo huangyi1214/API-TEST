@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/wechat.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/wechat.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import request from 'request'
+
+import User from '../models/user';
+import Account from "../models/account";
+import User_hierarchy from "../models/user_hierarchy";
+import config from '../../config';
+import utils from '../lib/utils';
+import log4js from '../lib/log';
+import { APIError, ErrorCode } from '../lib/APIError';
+
+/**
+ * @class 
+ * @classdesc 微信公共平台操作
+ */
+class Wechat {
+
+    /**
+     * 微信公众平台验证token
+     * @method
+     */
+    async token(req, res, next) {
+        let signature = req.query.signature,
+            timestamp = req.query.timestamp,
+            nonce = req.query.nonce,
+            echostr = req.query.echostr;
+
+        let dict = new Array("abc123456", timestamp, nonce);
+        dict.sort();
+        let sha1hex = utils.sha1hex(dict[0] + dict[1] + dict[2]);
+        if (sha1hex == signature) {
+            res.end(echostr);
+        } else {
+            res.end("");
+        }
+    }
+
+    /**
+     * 微信授权登录 登录后自动注册
+     * @method
+     * @param {string} code -微信授权后返回Code
+     * @param {string} state -微信授权后返回的state  系统用于记录推荐人
+     */
+    async login(req, res, next) {
+        let { code, upper: state } = req.query;
+
+        //请求token
+        let url_token = `https://api.weixin.qq.com/sns/oauth2/access_token?
+        appid=${config.appid}&amp;secret=${config.secret}&amp;code=${code}&amp;grant_type=authorization_code`;
+        request(url_token,async function (err, response, body) {
+            let result = JSON.parse(body);
+            if (!result.errcode) {
+                let access_token = result.access_token,
+                    expires_in = result.expires_in,
+                    refresh_token = result.refresh_token,
+                    openid = result.openid,
+                    scope = result.scope;
+
+                if (upper == "state") {
+                    //登录
+                    let user = await User.findByName(openid);
+                    if (user) {
+                        if (user.status != 1)
+                            return res.error(user.status == 0 ? "用户已禁用!" : "用户已注销!", ErrorCode.VerifyFail)
+                        let account = await Account.findByUserID(user.userID);
+                        req.session = user;
+                        req.session.access_token = access_token;
+                        req.session.refresh_token = refresh_token;
+
+                        res.success("登录成功!")
+
+                    } else {
+                        return res.error("用户尚未注册!", ErrorCode.VerifyFail)
+                    }
+                } else {
+
+
+                    let user = await User.findByName(openid);
+                    if (user != null) {
+                        return res.error("此用户已注册!", ErrorCode.VerifyFail)
+                    }
+
+                    //注册
+                    request("https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&amp;openid=" + openid + "&amp;lang=zh_CN",
+                       async function (err, response, body) {
+                            let result = JSON.parse(body);
+                            if (!result.errcode) {
+                                let nickname = result.nickname,
+                                    headimgurl = result.headimgurl,
+                                    sex = result.sex,
+                                    province = result.province,
+                                    city = result.city;
+
+                                let userinfo = {
+                                    access_token: access_token,
+                                    refresh_token: refresh_token,
+                                    openid: openid,
+                                    nickname: nickname,
+                                    headimgurl: headimgurl,
+                                    upper: upper,
+                                    sex: sex,
+                                    province: province,
+                                    city: city,
+                                    ip: utils.getClientIp(req)
+                                }
+                                wechat.register(req, res, next, userinfo);
+
+                            } else {
+                                next(err);
+                            }
+                        });
+                }
+
+            } else {
+                next(err);
+            }
+        })
+    }
+
+    /**
+     * 注册 内部方法
+     * @ignore
+     * @param {*} userinfo 
+     */
+    async register(req, res, next, userinfo) {
+        try {
+            let upper = await User.findByName(userinfo.upper);
+            if (!upper)
+                return res.error("直属经纪有误", ErrorCode.ParamError);
+            let encrypt = utils.randomLetter(6);
+            let password = utils.md5("abc123456" + encrypt);
+            let user = {
+                loginName: userinfo.openid,
+                name: userinfo.nickname,
+                password: password,
+                encrypt: encrypt,
+                pid: upper.userID,
+                pusername: upper.loginName,
+                sex: userinfo.sex,
+                city: userinfo.city,
+                province: userinfo.province,
+                headimgurl: userinfo.headimgurl
+            };
+            let admin = {
+                username: userinfo.openid,
+                name: userinfo.nickname,
+                password: password,
+                encrypt: encrypt,
+                createUser: upper.name,
+                lastloginip: userinfo.ip
+            }
+            let now = new Date();
+            let month = now.getMonth() + 1;
+            let date = now.getDate();
+            let account = {
+                accountNumber: now.getFullYear().toString() + (month.length > 1 ? month : '0' + month).toString() + (date.toString().length > 1 ? date : '0' + date).toString(),
+                password: utils.md5("abc123456")
+            }
+
+            //获取上级层级
+            let levels = await User_hierarchy.getListByUserID(upper.userID);
+            if (levels == null || levels.length &lt; 0)
+                return res.error("直属经纪有误")
+
+                let list_levels = [];
+                let firstlevel = levels[0];
+            //添加直属层级
+            list_levels.push({
+                parentID: firstlevel.userID,
+                userType: 8,
+                parentLevel: 1,
+                parentUser: upper.loginName,
+                parentType: firstlevel.userType
+            })
+            //设置直接所属
+            switch (firstlevel.userType) {
+                case 2:
+                    user.nationalCenterUser = upper.loginName;
+                    break;
+                case 3:
+                    user.centerUser = upper.loginName;
+                    break;
+                case 4:
+                    user.comprehensiveUser = upper.loginName;
+                    user.memberID = upper.userID;
+                    break;
+                case 5:
+                    user.agentVipUser = upper.loginName;
+                    break;
+                case 6:
+                    user.proxyUser = upper.loginName;
+                    break;
+                case 7:
+                    user.businessUser = upper.loginName;
+                    break;
+                case 8:
+                    user.oneAgentUser = upper.loginName;
+                    break;
+            }
+
+            let i = 1;
+            for (let j = 0; j &lt; levels.length; j++) {
+                let level = levels[j];
+                switch (level.parentType) {
+                    case 2:
+                        user.nationalCenterUser = level.parentUser;
+                        break;
+                    case 3:
+                        user.centerUser = level.parentUser;
+                        break;
+                    case 4:
+                        user.comprehensiveUser = level.parentUser;
+                        user.memberID = await User.findByName(level.parentUser).userID;
+                        break;
+                    case 5:
+                        user.agentVipUser = level.parentUser;
+                        break;
+                    case 6:
+                        user.proxyUser = level.parentUser;
+                        break;
+                    case 7:
+                        user.businessUser = level.parentUser;
+                        break;
+                    case 8:
+                        i++;
+                        switch (i) {
+                            case 2:
+                                user.twoAgentUser = level.parentUser;
+                                break;
+                            case 3:
+                                user.threeAgentUser = level.parentUser;
+                                break;
+                            case 4:
+                                user.fourAgentUser = level.parentUser;
+                                break;
+                            case 5:
+                                user.fiveAgentUser = level.parentUser;
+                                break;
+                        }
+                        break;
+                }
+                list_levels.push({
+                    parentID: level.parentID,
+                    userType: 8,
+                    parentLevel: level.parentLevel + 1,
+                    parentUser: level.parentUser,
+                    parentType: level.parentType
+                })
+            }
+            let result = await User.register(user, admin, account, list_levels);
+            if (result) {
+                let user = await User.findByName(userinfo.openid);
+                let account = await Account.findByUserID(user.userID);
+                req.session = user;
+                req.session.access_token = userinfo.access_token;
+                req.session.refresh_token = userinfo.refresh_token;
+                res.success("登录成功!")
+
+            } else {
+                return res.error("注册失败!", ErrorCode.VerifyFail)
+            }
+        } catch (e) {
+            next(e);
+        }
+    }
+}
+
+export default new Wechat();</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="APIError.html">APIError</a></li><li><a href="OAuth.html">OAuth</a></li><li><a href="Proxy.html">Proxy</a></li><li><a href="Trade.html">Trade</a></li><li><a href="User.html">User</a></li><li><a href="Wechat.html">Wechat</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ErrorCode">ErrorCode</a></li><li><a href="global.html#logout">logout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Oct 18 2017 15:43:35 GMT+0800 (中国标准时间)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

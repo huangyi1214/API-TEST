@@ -1,0 +1,171 @@
+
+/*信息框*/
+.dialog-msg{
+    color:#fff;
+    background-color:#222C5D;
+    padding:12px 15px;
+    position: fixed;
+    transition: all 0.4s ease-in-out;
+    top: -100px;
+    left: 25%;
+    width: 50%;
+    border-radius:4px;
+    text-align: center;
+    z-index: 100000;
+    font-size:16px;
+    opacity: 0;  
+}
+
+.dialog-msg.show{
+     opacity: 0.8;
+     top:10px;
+}
+
+.text-overflow{
+    text-overflow: ellipsis; overflow: hidden;white-space: nowrap;
+}
+
+.text-align-right{
+    text-align:right;
+}
+
+.text-align-center{
+    text-align:center;
+}
+
+.text-align-left{
+    text-align:left;
+}
+.hide{display: none !important;}
+.k-chart{height:180px; background-color:transparent; }
+.t-chart{height:180px; background-color:transparent;}
+.price,.jg-price{color:#fff;font-size:14px;position:absolute;top:43%;left:16%;}
+.price-int,.jg-price-int{color:#fff}
+.price-dec,.jg-price-dec{color:red}
+.trade-type-dxh .ds-list:nth-child(2){margin:0 5% 10px;}
+.djs-time{ width:100%; margin: 0 auto; position: relative; z-index: 10; height:60px; }
+.djs-warpper{width:40%;}
+.lsjl-warpper{width:30%}
+.wining-wrapper{width:30%}
+.djs{z-index:300;display:block;width:50px; font-size:18px; line-height:55px; margin:5px auto; color:#3BA3E1; text-align:center; height:55px;background:url(../images/nz.png); background-size: cover;}
+.gz-gg {color:#fff}
+.gz-list {width:95%;margin:0 auto;font-size:14px;color:#fff}
+.search-item{font-size:12px;}
+.lsjl{
+    position:absolute;
+    left:0;
+    top:8px;
+    background:url(../images/lsjl.png); 
+    background-size: 100% 100%;
+    height: 30px;
+    width:38%;
+}
+
+.wining{
+    position:absolute;
+    right:0;
+    top:8px;
+    background:url(../images/wining.png); 
+    background-size: 100% 100%;
+    height: 30px;
+    line-height: 30px;
+    width:38%;
+    text-align: left;
+    padding-left: 10px;
+    color:#fff;
+    font-size:13px;
+}
+
+.wining .amount{
+    color:#D5A45D;
+}
+
+@media (max-width:375px){
+    .wining{font-size:12px;}
+}
+
+@media (max-width:320px) {
+    .k-chart{height: 150px;}
+    .price{font-size:10px;top:41%;left:12%;}
+    .lsjl,.wining{height: 28px;top:12px;}
+    .k-chart,.t-chart{height:150px;}
+    .wining{font-size:10px;padding-left:5px;}
+}
+
+/* Make clicks pass-through */
+#nprogress {
+    pointer-events: none;
+}
+
+#nprogress .bar {
+    background: #29d;
+
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100%;
+    box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+    opacity: 1.0;
+
+    -webkit-transform: rotate(3deg) translate(0px, -4px);
+    -ms-transform: rotate(3deg) translate(0px, -4px);
+    transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Remove these to get rid of the spinner */
+#nprogress .spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 5px;
+    right: 15px;
+}
+
+#nprogress .spinner-icon {
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+
+    border: solid 2px transparent;
+    border-top-color: #29d;
+    border-left-color: #29d;
+    border-radius: 50%;
+
+    -webkit-animation: nprogress-spinner 400ms linear infinite;
+    animation: nprogress-spinner 400ms linear infinite;
+}
+
+.nprogress-custom-parent {
+    overflow: hidden;
+    position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+    position: absolute;
+}
+
+@-webkit-keyframes nprogress-spinner {
+    0%   { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes nprogress-spinner {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.yaoqm{
+    position:absolute;bottom:100px;width:100%;font-size:14px;color:#CCA958;text-align:center
+}
